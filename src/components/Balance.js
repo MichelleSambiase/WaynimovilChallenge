@@ -1,7 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
+
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const Balance = ({dataBalance}) => {
+  const copyToClipboard = () => {
+    Clipboard.setString(dataBalance?.result.bankInfo.result.cvu);
+  };
+
+  const showAlert = () => {
+    Alert.alert('CVU Copiado con exito!');
+  };
   return (
     <View style={styles.cardBalance} elevation={5}>
       <View style={styles.contentBalance}>
@@ -15,7 +24,23 @@ const Balance = ({dataBalance}) => {
         </View>
         <View style={styles.divisor} />
         <View>
-          <Text>CVU: </Text>
+          <View style={styles.containerCvu}>
+            <View style={styles.rowCvu}>
+              <Text style={styles.titleCVU}>CVU: </Text>
+
+              <Text style={styles.contentCvu}>
+                {dataBalance?.result.bankInfo.result.cvu}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => {
+                copyToClipboard();
+                showAlert();
+              }}>
+              <Text style={styles.divCopy}>Copiar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -38,11 +63,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerBalance: {
-    height: 50,
+    height: '25%',
+    justifyContent: 'flex-end',
   },
   titleBalance: {
     color: '#2A1846',
     fontStyle: 'normal',
+    fontWeight: '600',
     fontSize: 17,
   },
   contentDetail: {
@@ -58,6 +85,31 @@ const styles = StyleSheet.create({
     order: 1,
     flexGrow: 0,
     marginTop: '3%',
+  },
+  containerCvu: {
+    width: '100%',
+    height: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  rowCvu: {
+    flexDirection: 'row',
+  },
+  titleCVU: {
+    color: '#575372',
+  },
+  contentCvu: {
+    color: '#2A1846',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 14,
+  },
+  divCopy: {
+    color: '#442E83',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
 

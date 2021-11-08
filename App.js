@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import {} from 'react-native/Libraries/NewAppScreen';
 import Balance from './src/components/Balance';
+import Movements from './src/components/Movements';
 
 const App = () => {
   const [dataBalance, setDataBalance] = useState();
@@ -13,8 +14,8 @@ const App = () => {
       const response = await axios.get(
         'https://run.mocky.io/v3/d3586928-f1a4-48d2-9a0e-1140bab1e562',
       );
-      /*       console.log(response.data);
-       */ setDataBalance(response.data);
+      /*  console.log(response.data.result.activity.result[1]); */
+      setDataBalance(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +30,9 @@ const App = () => {
       </View>
       <View>
         <Balance dataBalance={dataBalance} />
+      </View>
+      <View>
+        <Movements dataBalance={dataBalance} />
       </View>
     </View>
   );
