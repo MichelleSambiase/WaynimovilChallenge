@@ -19,13 +19,18 @@ const MovementsCard = ({dataBalance}) => {
                     year: '2-digit',
                   })}
                 </Text>
-
-                <View style={{marginLeft: '8%'}}>
+                <View style={styles.allContenMovements}>
                   <Text style={styles.contentMovements}>{item.info}</Text>
+                  <View style={{}}>
+                    {item.debit ? (
+                      <Text style={styles.TextBalance}>- {item.debit},00</Text>
+                    ) : (
+                      <Text style={styles.TextBalanceCredit}>
+                        + {item.credit},00
+                      </Text>
+                    )}
+                  </View>
                 </View>
-              </View>
-              <View style={{alignSelf: 'center'}}>
-                <Text>{item.balance}</Text>
               </View>
             </View>
             <View style={styles.containerDivisor}>
@@ -43,22 +48,42 @@ const styles = StyleSheet.create({
   containerMovements: {
     backgroundColor: '#ffffff',
     width: '100%',
-    height: 60,
-    flexDirection: 'row',
   },
   contentFlex: {
     flexDirection: 'row',
-    width: '90%',
-    justifyContent: 'flex-start',
-    alignSelf: 'center',
-    alignItems: 'flex-start',
+    width: '100%',
+    height: 60,
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   items: {
-    marginLeft: '3%',
+    color: '#2A1846',
+    fontSize: 14,
+  },
+  allContenMovements: {
+    flexDirection: 'row',
+    width: '75%',
+    justifyContent: 'space-between',
   },
   contentMovements: {
-    flexDirection: 'column',
-    width: '80%',
+    color: '#2A1846',
+    fontWeight: '500',
+    fontStyle: 'normal',
+    fontSize: 14,
+    width: '50%',
+  },
+
+  TextBalance: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#F96440',
+  },
+  TextBalanceCredit: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#00A067',
   },
   containerDivisor: {
     justifyContent: 'flex-end',

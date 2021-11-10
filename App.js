@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
 
 import {} from 'react-native/Libraries/NewAppScreen';
 import Balance from './src/components/Balance';
 import Movements from './src/components/Movements';
+import Actions from './src/components/Actions';
 
 const App = () => {
   const [dataBalance, setDataBalance] = useState();
@@ -24,17 +25,22 @@ const App = () => {
     getMyBalance();
   }, []);
   return (
-    <View style={styles.containerAll}>
-      <View style={styles.containerTitle}>
-        <Text style={styles.title}>Mi cuenta</Text>
+    <ScrollView>
+      <View style={styles.containerAll}>
+        <View style={styles.containerTitle}>
+          <Text style={styles.title}>Mi cuenta</Text>
+        </View>
+        <View>
+          <Balance dataBalance={dataBalance} />
+        </View>
+        <View>
+          <Actions />
+        </View>
+        <View>
+          <Movements dataBalance={dataBalance} />
+        </View>
       </View>
-      <View>
-        <Balance dataBalance={dataBalance} />
-      </View>
-      <View>
-        <Movements dataBalance={dataBalance} />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
